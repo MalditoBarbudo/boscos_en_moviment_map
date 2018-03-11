@@ -1,0 +1,18 @@
+---
+title: "BEM_map"
+output: 
+  html_document: 
+    css: custom.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(leaflet)
+library(mapview)
+load('global_map.RData')
+```
+
+```{r, fig.width=12}
+global_map
+```
+
