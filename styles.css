@@ -8,3 +8,9 @@ div.outer {
   padding: 0;
 }
 
+.textphoto {
+  font-family: "Montserrat", sans-serif;
+  color: #FFFFFF;
+  padding: 5px;
+  text-align: justify;
+}
