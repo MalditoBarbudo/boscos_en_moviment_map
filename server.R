@@ -10,10 +10,11 @@
 library(shiny)
 library(leaflet)
 library(mapview)
-load('global_map.RData')
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
+  
+  load('global_map.RData')
    
   output$bem_map <- renderLeaflet({
     
