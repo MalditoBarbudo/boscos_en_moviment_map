@@ -12,9 +12,10 @@ library(leaflet)
 
 shinyUI(fluidPage(
   
+  tags$head(
+    includeCSS("styles.css")
+  ),
+  
   div(class = 'outer',
-      tags$head(
-        includeCSS("styles.css")
-      ),
       leafletOutput("bem_map", width = '100%', height = '100%'))
 ))
