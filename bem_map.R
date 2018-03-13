@@ -64,7 +64,14 @@ data_map_foto[12, 'long'] <- 2.42
 
 
 data_map_text <- data_map %>%
-  dplyr::filter(recurso == 'text', !is.na(Texto_OK))
+  dplyr::filter(recurso == 'text', !is.na(Texto_OK)) %>%
+  tibble::add_row(
+    lat = 50.93,
+    long = 5.57,
+    NOMBRE = "Lieve Van Mellaert",
+    BOSC = "(Heather and conifer landscape)",
+    Texto_OK = "Once in a while we can experience majesty and unconditional love. This memory will always stay with me. I was about 18 years old and a girl scouts leader. During an outdoor activity in the forest, I was sitting at the foot of an large tree. It was very silent in the forest while I was hiding for the kids of my group as a part of the game. I was sitting against the stem of the tree and heard some birds. Looking up to all this beautiful large trees around me I was feeling very very small. But suddenly, it was as if all the majesty, energy and enormous growing power of the tree was flowing into me. I was experiencing a very blissful, peaceful and liberating feeling."
+  )
 
 map_video <- data_map_video %>%
   leaflet(options = leafletOptions(worldCopyJump = TRUE, scales = 100)) %>%
