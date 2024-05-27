@@ -2,6 +2,7 @@ library(tidyverse)
 library(leaflet)
 library(htmltools)
 library(mapview)
+library(leafpop)
 
 load('data_map.RData')
 
@@ -13,7 +14,7 @@ data_map_video <- data_map %>%
          link = paste0('https://www.youtube.com/embed/',arxivo,'?autoplay=1'))
 
 for (i in 1:length(data_map_video$link)) {
-  data_map_video$link[i] <- mapview:::popupIframe(data_map_video$link[i])
+  data_map_video$link[i] <- leafpop:::popupIframe(data_map_video$link[i])
 }
 
 # silvia ferrer foto
@@ -50,7 +51,7 @@ data_map_foto <- data_map %>%
                   'https://lh3.googleusercontent.com/viA3A8T6-urK6HLbKWlWKd6VcRMTiXrBhLyXgC96CqWL6JlP75ZUogzuEEZS3FNSc2Fbfys52CUVI5ZGuFwdo8mQXZ4N9U7279Yc7fKmX_raF07W2rtDMv9NRHKV3x4a-kVsMbvOb95IvWfuKVzLPAnNHHdJjQiFv0v7p2QWhOECaPubOWHQnhFVZLudNEq5WcpbB_INCPcJugncg8lgtpRa7j5ILSt8xWR6YsKkQQtekD0oIutnXXJoEYshgNRdPSM2Dfu5Z9L2A5lrWTbFBQD82nJW_cZZjE_49nRp4HXb2qNKQccQpBm4D9YDP5mK4xoO4WqAdK-nw_Zalzk72j0bEv5HQTe4IouZLF2YHfdXF1PBA0Bh6Ud1TkBj-tUdeDNB77bzQd_vx9dn8oOjbiaYo-YycgRW952TsoZcDa8Z84TGwK592U5EAumq0dP8Bgt3uzRYgghyGsLmJqsIS0wSYl3yxEuf5td7dG3a7nbZD96nxRUTkqmRBAXEzZ2mCYIKEh5i0OtQhMxfLC67tb5lYjrL5aYzxXvD8EpIyvCrl3a1KNkCJdVSANgRz_xnw_eIturbUtD4VQWl3-t4YUtKRCUrH4iig3VbrzKZVnzRcLswSuCuDaKx5hSHUr0xJ4I8LDYHmaQna9MZ8rqUlfPA6ayjcdlt=w1152-h1536-no'
                   #####
                 ),
-                link_3 = mapview::popupImage(link_2, src = 'remote', width = 350),
+                link_3 = leafpop::popupImage(link_2, src = 'remote', width = 350),
                 Texto_OK = if_else(is.na(Texto_OK), '', Texto_OK, ''),
                 link_4 = {
                   link_3 %>%
@@ -114,9 +115,10 @@ map_text <- data_map_text %>%
 
 global_map <- data_map_video %>%
   leaflet(options = leafletOptions(worldCopyJump = TRUE, scales = 100)) %>%
-  addProviderTiles(
-    provider = 'Stamen.Watercolor'
-  ) %>%
+  # addProviderTiles(
+  #   provider = 'Thunderforest.MobileAtlas'
+  # ) %>%
+  addTiles() |>
   addCircleMarkers(~long, ~lat, popup = ~link,
                    color = '#F03434', label = ~htmlEscape(paste(NOMBRE, BOSC, sep = '\n')),
                    fillOpacity = 0.85, stroke = FALSE, radius = 12) %>%
